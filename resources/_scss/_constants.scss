@@ -1,0 +1,43 @@
+// Constants
+// ---------
+
+// Colors
+// --------------------------------------------------------
+// This sets the color scheme, a nice dusty topaz by default
+$hue: #ebebeb;
+$hueLight: lighten($hue, 8%);
+$hueDark: darken($hue, 8%);
+
+// The text color is a very dark formulation of $hue
+$ink: darken($hue, 48%);
+
+// And a few grays to round things out
+$gray: #000000;
+$grayLight: lighten($gray, 31%);
+
+// Typography
+// --------------------------------------------------------
+// This stack starts with our webfont, embedded in _fonts.scss, and lists a few system monospace fonts as fallbacks
+$font: "dejavu-mono", "Bitstream Vera Sans Mono", "Menlo", "Courier", monospace;
+
+// This is the font-size (in pixels, but set here without units) for all the text. If you want to change the font-size of a particular element, set it in ems relative to this number.
+$emBase: 16;
+// This is the line-height (in pixels, but also set without units) for all the text
+$lead: 26;
+// And this computes line-height as a unitless proportion
+$baseLineHeight: ($lead / $emBase);
+
+// These are the font-weight values we use. They're set as constants so that we can set them to numerical weights if need be
+$regular: normal;
+$bold: bold;
+
+// Measurements
+// --------------------------------------------------------
+// The width of .loom (the container)
+$width: 43em;
+
+// The standard unit of space, vertical or horizontal
+$space: 1.65em;
+// A smaller space
+$shim: 1em;
+$borderThickness: 1px;

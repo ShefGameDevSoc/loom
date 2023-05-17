@@ -1,0 +1,157 @@
+// Base
+// ----
+
+// Apply a natural box layout model to everything
+*,
+*:before,
+*:after { 
+  box-sizing: border-box;
+}
+
+// Global
+// --------------------------------------------------------
+html,
+body,
+button,
+textarea,
+input {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  // This mixin (who lives in _mixins.scss) includes our base typographic styles
+  @include base((($emBase / 16) * 1em), $baseLineHeight);
+
+  // Let's center all the children of body
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  font-weight: $regular;
+  background-color: rgb(199, 199, 199);
+  margin: 0;
+
+
+  // And this one reduces the font-size on screens 30em wide or less
+  @media only screen and (max-width: 30em) {
+    font-size: 0.875em;
+  }
+}
+
+// Block level
+// --------------------------------------------------------
+header {
+  margin-bottom: $space;
+}
+
+figure {
+  margin: 0;
+}
+
+// Let's set a sensible default
+img {
+  display: block;
+  width: 100%;
+}
+
+// Typography
+// --------------------------------------------------------
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  // This mixin (and all to follow) allows us to share typographic styles between web and email without repeating ourselves
+  @include heading;
+}
+
+p {
+  margin: 0 0 1em;
+
+  header & {
+    margin-bottom: 0;
+  }
+}
+
+ul, 
+ol {
+  padding-left: ($space * 1.5);
+  margin: 0 0 1em;
+
+  nav & {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 0;
+  }
+}
+
+blockquote {
+  @include blockquote;
+}
+
+a,
+[type=submit] {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: $hueLight;
+  text-underline-offset: 0.188em;
+  text-decoration-thickness: $borderThickness;
+}
+
+[type=submit] {
+  background: transparent;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: $font;
+  font-size: 100%;
+  line-height: $baseLineHeight;
+  color: $ink;
+}
+
+input,
+textarea {
+  caret-color: $hue;
+
+  &::placeholder {
+    color: $hue;
+    opacity: 1;
+  }
+}
+
+code {
+  @include code;
+}
+
+pre {
+  @include pre;
+}
+
+strong {
+  font-weight: $bold;
+}
+
+small {
+  font-size: 1em;
+}
+
+hr {
+  @include hr;
+}
+
+
+
