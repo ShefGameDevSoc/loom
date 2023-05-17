@@ -63,7 +63,7 @@
 @mixin hr($width: 8.7em, $margin: $space) {
   width: $width;
   border: none;
-  border-top: $borderThickness solid $hueLight;
+  border-top: $borderThickness solid black;
   margin: $margin auto;
 }
 
