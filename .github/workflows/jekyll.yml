@@ -46,6 +46,7 @@ jobs:
         # Outputs to the './_site' directory by default
         run: | 
             bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+            npm install juice -g
             juice --preserve-important true --remove-style-tags false --web-resources-images false _site/email/index.html _site/email/index.html.txt
         env:
           JEKYLL_ENV: production
