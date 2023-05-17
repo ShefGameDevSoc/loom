@@ -1,0 +1,33 @@
+# Change these placeholders to something true (or utterly untrue) for you
+title: Loom
+description: is a jekyll theme that weaves HTML emails
+author:
+  name: you
+  location: Right here at home
+  # Add the URL for a page about you to appear in the footer of the email
+  # profile: https://your.website/about
+timezone: America/Detroit
+
+# Nothing unexpected will happen if you leave these alone
+imagePath: /resources/images
+permalink: :title/
+exclude: ["Gemfile", "Gemfile.lock", "resources/css/email.scss.liquid", "scripts"]
+markdown: kramdown
+kramdown:
+  auto_ids: false
+  syntax_highlighter: nil
+sass:
+  sass_dir: resources/_scss
+  style: :compressed
+
+defaults:
+  -
+    scope:
+      type: "posts"
+    values:
+      layout: "post"
+  -
+    scope:
+      type: "drafts"
+    values:
+      layout: "post"

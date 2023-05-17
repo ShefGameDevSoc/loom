@@ -1,0 +1,463 @@
+// Email
+// -----
+
+// These styles are included in the <head> of email.html and inlined when we run ./scripts/email.sh
+// We've named the file 'email.scss.liquid' so that liquid will process the site.baseurl tag in the @font-face declarations for us. If you don't need it to do that, you can rename it to 'email.scss' here and in email.html
+
+// Front matter
+// --------------------------------------------------------
+// Define the available color schemes
+:root {
+  color-scheme: light;
+  supported-color-schemes: light;
+}
+
+// Pull in our global constants and mixins
+@import "constants";
+@import "mixins";
+
+// Constants
+// --------------------------
+// Convert $emBase to px
+$textSize: ($emBase * 1px);
+// Convert $lead to percentage
+$textLead: (($lead / $emBase) *100%);
+
+$width: 600px;
+$space: 16px;
+$spaceLarge: 20px;
+
+// Fonts
+// --------------------------
+// We'll embed our fonts separately here so we can define an absolute path from the email client to the font files
+@font-face {
+  font-family: 'dejavu-mono';
+  font-style: normal;
+  font-weight: $regular;
+  // For these webfonts to work, you'll need to set site.baseurl in _config-web.yml and make sure the files are up on your webserver
+  src: url({{ site.baseurl }}/resources/fonts/DejaVuSansMono.woff) format('woff'),
+       url({{ site.baseurl }}/resources/fonts/DejaVuSansMono.ttf) format('truetype');
+  // Or, you can use this CDN link, although we don't know if it'll work forever, and it doesn't serve the ttf files, which some email clients want. But hey, another option.
+  // src: url('https://fonts.cdnfonts.com/s/108/DejaVuSansMono.woff');
+}
+
+@font-face {
+  font-family: 'dejavu-mono';
+  font-style: italic;
+  font-weight: $regular;
+  // Ditto
+  src: url({{ site.baseurl }}/resources/fonts/DejaVuSansMono-Oblique.woff) format('woff'),
+       url({{ site.baseurl }}/resources/fonts/DejaVuSansMono-Oblique.ttf) format('truetype');
+  // src: url('https://fonts.cdnfonts.com/s/108/DejaVuSansMono-Oblique.woff');
+}
+
+@font-face {
+  font-family: 'dejavu-mono';
+  font-style: normal;
+  font-weight: $bold;
+  // Ditto
+  src: url({{ site.baseurl }}/resources/fonts/DejaVuSansMono-Bold.woff) format('woff'),
+       url({{ site.baseurl }}/resources/fonts/DejaVuSansMono-Bold.ttf) format('truetype');
+  // src: url('https://fonts.cdnfonts.com/s/108/DejaVuSansMono-Bold.woff');
+}
+
+// Client-specific styles
+// --------------------------------------------------------
+// Prevent WebKit and Windows mobile changing default text sizes
+.body, p, a, li, blockquote {
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+}
+
+.ReadMsgBody {
+  width: 100%;
+}
+
+// Reset
+// --------------------------------------------------------
+.body {
+  padding: 0;
+  margin: 0;
+
+
+}
+
+img {
+  height: auto;
+  text-decoration: none;
+  line-height: 100%;
+  border: 0;
+  outline: none;
+}
+
+.body,
+#bodyTable,
+#bodyCell {
+  width: 100% !important;
+  height: 100% !important;
+  padding: 0;
+  margin: 0;
+}
+
+small {
+  font-size: 1em;
+}
+
+// Template
+// --------------------------------------------------------
+// This is the container. It's a table :\
+#cloth {
+  width: $width;
+  padding: 0 $space ($spaceLarge * 2);
+}
+
+// Global
+// --------------------------
+.body,
+#bodyTable {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  // This mixin (and all to follow) allows us to share typographic styles between web and email without repeating ourselves
+  @include heading($textSize);
+
+  display: block;
+  line-height: $textLead;
+  color: $ink;
+}
+
+ul,
+ol {
+  padding-left: 2em;
+  margin: 0 0 $space;
+}
+
+figure {
+  margin: 0;
+}
+
+hr {
+  @include hr(114px, $spaceLarge);
+}
+
+// Header
+// --------------------------
+.header-content {
+  @include base($textSize, $textLead);
+
+  padding: ($spaceLarge * 1.618) 0;
+
+  p {
+    margin: 0;
+  }
+
+  time {
+    font-weight: $regular;
+  }
+}
+
+.thread {
+  display: inline-block;
+  font-family: $font;
+  font-weight: $regular;
+  color: $hue;
+  padding-bottom: 3px;
+
+  .footer-content & {
+    padding-top: 2px;
+  }
+}
+
+// Body
+// --------------------------
+.body-content {
+  @include base($textSize, $textLead);
+
+  padding-bottom: (($spaceLarge * 1.618) - $space);
+
+  p {
+    margin: 0 0 $space;
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  a,
+  a:link,
+  a:visited {
+    font-weight: $regular;
+    // This works in iOS Mail
+    text-underline-offset: 0.188em;
+    text-decoration-color: $hueLight;
+    color: $hueDark;
+  }
+
+  // It's a button-shaped link
+  .inclusion {
+    text-align: center;
+    margin: $space 0 $spaceLarge;
+
+    a {
+      display: inline-block;
+      font-weight: $bold;
+      line-height: 200%;
+      text-decoration: none;
+      color: white;
+      background-color: $hue;
+      padding: 0 $space;
+    }
+  }
+
+  img {
+    display: block;
+    max-width: ($width - ($space * 2));
+    height: auto;
+    margin: $space 0;
+
+    // This class is added automatically in _includes/figure.liquid if a caption is set
+    &.has-caption {
+      margin-bottom: 0;
+    }
+  }
+
+  // This is the image caption
+  small {
+    display: block;
+    text-align: right;
+  }
+
+  code {
+    @include code;
+  }
+
+  pre {
+    @include pre;
+  }
+
+  blockquote {
+    @include blockquote($space);
+  }
+
+
+}
+
+// Footer
+// --------------------------
+.footer-content {
+  @include base($textSize, $textLead);
+
+  p {
+    margin: 0;
+  }
+
+  a,
+  a:link,
+  a:visited {
+    color: $hueDark;
+    // this works in iOS Mail
+    text-underline-offset: 0.188em;
+    text-decoration-color: $hueLight;
+  }
+
+  hr {
+    margin: 0 0 $spaceLarge;
+  }
+
+
+}
+
+// Responsive styles
+// --------------------------------------------------------
+@media only screen and (max-width: $width) {
+  // Client-specific styles
+  // --------------------------
+  // Prevent Webkit from changing default text sizes
+  .body, p, a, li, blockquote {
+    -webkit-text-size-adjust: none !important;
+  }
+
+  // Prevent iOS Mail from adding padding to the body
+  .body {
+    width: 100% !important;
+    min-width: 100% !important;
+  }
+
+  // Global
+  // --------------------------
+  #cloth {
+    width: 100% !important;
+  }
+
+  // Body
+  // --------------------------
+  .body-content {
+    img {
+      width: 100% !important;
+      max-width: none !important;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .header-content,
+  .body-content,
+  .footer-content {
+    font-size: 14px !important;
+  }
+}
+
+// Print styles
+// --------------------------------------------------------
+@media print {
+  $size: 9pt;
+
+  @include print;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  #cloth,
+  .header-content,
+  .body-content,
+  .footer-content {
+    font-size: $size;
+  }
+
+  #cloth {
+    width: 40em;
+  }
+
+  .body-content {
+    img {
+      break-inside: avoid;
+    }
+  }
+
+  .footer-content {
+    display: none;
+  }
+}
+
+.presentational-container {
+
+}
+
+table {
+  background: none;
+  margin: 0;
+  padding: 10px 10px 0;
+  // border-width: 3px 0 0 0;
+  // border-style: solid;
+  // border-color: #000000;
+  width: 100%;
+}
+
+tr.outer-row td.headshot-cell {
+  padding: 0 12px 0 0;
+}
+
+td.headshot-cell a {
+  text-decoration: none;
+}
+
+td.headshot-cell img {
+  vertical-align: middle;
+  width:120px;
+  border-radius: 100%;
+}
+
+td.description-cell {
+  padding: 0 0 0 12px;
+}
+
+td.description-cell > table {
+  background: none;
+  border: 0px;
+  margin: 0;
+  padding: 0;
+}
+
+td.full-name {
+  font-weight: bold;
+  color: #232C9F;
+  font-size: 18px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+td.title {
+  padding-bottom: 10px;
+  color: #333333;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+td.website {
+  padding-bottom: 10px;
+  vertical-align: top;
+  color: #333333;
+  font-size: 14px;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+td.website a {
+  color: #4BAFDB;
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 14px;
+}
+
+td.social-icons {
+  padding-top: 5px;
+}
+
+td.social-icons ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  height: 25px;
+}
+
+td.social-icons li {
+  display: inline-block;
+}
+
+td.social-icons a {
+  text-decoration: none;
+}
+
+td.social-icons img {
+  width: 25px;
+  height: 25px;
+}
+
+h1 {
+  font-size: 3rem;
+}
+p,h1,h2,h3 {
+  text-align: center;
+}
+
+
+#cloth {
+  background-color: white;
+}
+html {
+  background-color: lightpink;
+}

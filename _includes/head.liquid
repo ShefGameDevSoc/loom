@@ -1,0 +1,20 @@
+{%- for post in site.posts limit:1 -%}
+  {% assign latest = post.url %}
+{%- endfor -%}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <title>{% if page.title %}{{ page.title }} &ndash; {% endif %}{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="author" content="{{ site.author.name }}">
+  <meta name="color-scheme" content="light dark only">
+  <meta name="supported-color-schemes" content="light dark only">
+  {%- comment -%} Uncomment this if you've enabled the feed plugin in Gemfile {%- endcomment -%}
+  {%- comment-%}{% feed_meta %}{% endcomment %}
+  <link rel="author" href="humans.txt">
+  <link rel="stylesheet" href="{{ site.baseurl }}/resources/css/styles.css">
+  {% if page.redirect == true %}<meta http-equiv="refresh" content="1;url={{ site.baseurl }}{{ latest }}" />{% endif %}
+</head>

@@ -1,0 +1,127 @@
+// Components
+// ----------
+
+// Loom
+// The container
+// --------------------------------------------------------
+.loom {
+  width: 100%;
+  max-width: ($width + ($shim * 2));
+  padding: $space $shim 0;
+  margin-bottom: ($space * 2);
+}
+
+// Beam
+// The page header
+// --------------------------------------------------------
+.beam {
+  margin-bottom: ($space * 1.25);
+
+  h1,
+  p {
+    font-weight: $regular;
+    margin-bottom: 1em;
+  }
+}
+
+// Warp
+// The list of posts
+// --------------------------------------------------------
+// ul
+.warp {
+  list-style-type: none;
+  padding-left: 0;
+  margin-bottom: $space;
+}
+
+// li
+.warp--item {
+  a {
+    display: inline-block;
+  }
+}
+
+// The little sprigs that appear in various places
+.thread {
+  font-weight: $regular;
+  color: $hue;
+
+  header & {
+    display: inline-block;
+    padding: 0.063em 0 0.125em;
+  }
+}
+
+// Skein
+// A full post
+// --------------------------------------------------------
+.skein {
+  width: 100%;
+
+  header {
+    text-align: center;
+  }
+
+  img {
+    width: calc(100% + (#{$shim} * 2));
+    margin: 0 ($shim * -1) 1em;
+
+    // This class is added automatically in _includes/figure.liquid if a caption is set
+    &.has-caption {
+      margin-bottom: 0;
+    }
+  }
+
+  // This is the image caption
+  small {
+    display: block;
+    text-align: right;
+    color: $gray;
+
+    padding-top: 0.25em;
+  }
+}
+
+// Shuttle
+// A subscription form
+// --------------------------------------------------------
+// form
+.shuttle {
+  margin: $space 0;
+}
+
+.shuttle--row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & + & {
+    padding-top: 0.25em;
+  }
+
+  label,
+  input {
+    display: block;
+  }
+
+  label {
+    margin-bottom: 0.125em;
+  }
+
+  // Add more input types here if you need them
+  [type="text"],
+  [type="email"] {
+    width: 100%;
+    max-width: 26.563em;
+    height: ((($lead * 1.5) / $emBase) * 1em);
+    text-align: center;
+
+    padding: 0;
+    border: $borderThickness solid $hueLight;
+    border-radius: 0 12.5%;
+
+    &:focus {
+      border-radius: 12.5% 0;
+    }
+  }
+}

@@ -1,0 +1,36 @@
+// Fonts
+// -----
+
+// DejaVu Sans Mono
+// https://dejavu-fonts.github.io
+// --------------------------------------------------------
+// Regular
+@font-face {
+  font-family: 'dejavu-mono';
+  font-weight: $regular;
+  font-style: normal;
+  // Ask the browser to look for a local copy of the font before loading the appropriate woff file
+  src: local('DejaVu Sans Mono'),
+       url('../fonts/DejaVuSansMono.woff2') format('woff2'),
+       url('../fonts/DejaVuSansMono.woff') format('woff');
+}
+
+// Italic
+@font-face {
+  font-family: 'dejavu-mono';
+  font-weight: $regular;
+  font-style: italic;
+  src: local('DejaVu Sans Mono Oblique'),
+       url('../fonts/DejaVuSansMono-Oblique.woff2') format('woff2'),
+       url('../fonts/DejaVuSansMono-Oblique.woff') format('woff');
+}
+
+// Bold
+@font-face {
+  font-family: 'dejavu-mono';
+  font-weight: $bold;
+  font-style: normal;
+  src: local('DejaVu Sans Mono Bold'),
+       url('../fonts/DejaVuSansMono-Bold.woff2') format('woff2'),
+       url('../fonts/DejaVuSansMono-Bold.woff') format('woff');
+}

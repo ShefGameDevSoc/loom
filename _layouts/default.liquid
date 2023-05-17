@@ -1,0 +1,20 @@
+{%- include head.liquid -%}
+
+<body>
+  <div class="loom">
+    <header class="beam">
+        {% if page.url == "/" %}<h1>{% else %}<p>{% endif %}
+          <a href="{{ site.baseurl }}/"><strong>{{ site.title }}</strong></a> {{ site.description }}</h1>
+        {% if page.url == "/" %}</h1>{% else %}</p>{% endif %}
+        <nav>
+          <ul>
+            <li><a href="{{ site.baseurl }}/latest">Latest post</a></li>
+          </ul>
+        </nav>
+    </header>
+    <main>
+      {{ content }}
+    </main>
+  </div>
+</body>
+</html>

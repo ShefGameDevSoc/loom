@@ -1,0 +1,10 @@
+---
+---
+
+/* TEAM */
+gardener: {{ site.author.name }}
+location: {{ site.author.location }}
+
+/* SITE */
+last update: {{ site.time | date: "%Y/%m/%d" }}
+tools: jekyll, juice

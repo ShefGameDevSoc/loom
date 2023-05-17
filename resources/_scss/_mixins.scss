@@ -1,0 +1,89 @@
+// Mixins
+// ------
+
+// Base typography
+// --------------------------
+@mixin base($size, $leading) {
+  font-family: $font;
+  font-size: $size;
+  line-height: $leading;
+  color: $ink;
+}
+
+// h1-h6
+// --------------------------
+@mixin heading($size: 1em) {
+  font-size: $size;
+  font-weight: $bold;
+  margin: 0;
+}
+
+// blockquote
+// --------------------------
+@mixin blockquote($margin: 1em) {
+  padding-left: $space;
+  border-left: $borderThickness solid $hueDark;
+  margin: $margin 0;
+
+  p {
+    font-style: italic;
+  }
+
+  cite {
+    font-style: normal;
+  }
+}
+
+// code
+// --------------------------
+@mixin code {
+  font-family: $font;
+  background-color: $grayLight;
+
+  @media (prefers-color-scheme: dark) {
+    // These need to override inline styles in email.html
+    color: white !important;
+    background-color: darken($ink, 6%) !important;
+  }
+}
+
+@mixin pre {
+  background-color: $grayLight;
+  padding: 0.5em 1em;
+  margin: 0 0 1.25em;
+
+  @media (prefers-color-scheme: dark) {
+    // Ditto
+    background-color: darken($ink, 6%) !important;
+  }
+}
+
+// hr
+// --------------------------
+@mixin hr($width: 8.7em, $margin: $space) {
+  width: $width;
+  border: none;
+  border-top: $borderThickness solid $hueLight;
+  margin: $margin auto;
+}
+
+// Print styles
+// --------------------------
+@mixin print {
+  * {
+    color: black !important;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid;
+  }
+
+  hr {
+    border-color: black;
+  }
+}

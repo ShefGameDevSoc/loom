@@ -1,0 +1,16 @@
+---
+layout: default
+---
+
+<ul class="warp">
+{%- for post in site.posts -%}
+  {%- capture cycle -%}{% cycle 'odd', 'even' %}{% endcapture %}
+  <li class="warp--item">
+    <a href="{{ site.baseurl }}{{ post.url }}">
+      <strong>{{ post.title }}</strong> 
+      {% if cycle == 'even' %}{% include thread-up.html %}{% else %}{% include thread-down.html %}{% endif %}
+      <time datetime="{{ page.date | date: '%F' }}">{{ post.date | date: '%B %Y' }}</time>
+    </a>
+  </li>
+{%- endfor %}
+</ul>

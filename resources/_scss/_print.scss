@@ -1,0 +1,25 @@
+// Print
+// -----
+
+@media print {
+  @include print;
+
+  body {
+    // Reset from display: flex, which doesn't work when printing
+    display: block;
+    font-size: 9pt;
+  }
+
+  .loom {
+    width: 40em;
+    margin: 0 auto;
+  }
+
+  .beam {
+    display: none;
+  }
+}
+
+@page {
+  margin: 0.75in;
+}

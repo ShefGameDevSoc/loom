@@ -1,0 +1,134 @@
+---
+permalink: email/
+---
+
+{%- for post in site.posts limit:1 -%}
+  {% assign latest = post %}
+{%- endfor -%}
+
+<!DOCTYPE html>
+<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light dark only">
+  <meta name="supported-color-schemes" content="light dark only">
+  <title>{{ latest.title }}</title>
+  {%- capture styles -%}{% include_relative resources/css/email.scss.liquid %}{% endcapture %}
+  <style type="text/css">
+    {{ styles | scssify }}
+  </style>
+</head>
+<body class="body" leftmargin="0" marginwidth="0" topmargin="0" marginheight="0" offset="0">
+  <center>
+    <div style="display: none">{{ latest.content | markdownify | strip_html | truncatewords: 20 }}</div>
+    <div role="article" aria-roledescription="email" aria-label="{{ latest.title }}" lang="en">
+      <table id="bodyTable" align="center" border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="font-size:1rem" role="presentation">
+        <tr>
+          <td id="bodyCell" align="center" valign="top">
+            <table id="cloth" border="0" cellpadding="0" cellspacing="0" role="presentation">
+              <tr>
+                <td align="center" valign="top">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                    <tr>
+                      <td valign="top" align="center" class="header-content">
+                        <h1>{{ latest.title }}</h1>
+                        <img src="https://shefgamedevsoc.github.io/assets/icons/Logo.png" width=40% />
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td align="center" valign="top">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                    <tr>
+                      <td valign="top">
+                        <div class="body-content">
+                          {{ latest.content }}
+                        </div>
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+              <tr>
+                <td align="center" valign="top">
+                  <table border="0" cellpadding="0" cellspacing="0" width="100%" role="presentation">
+                    <tr>
+                      <td valign="top" align="center" class="footer-content">
+
+                        <p>
+                          <a href="{{ site.baseurl }}/{{ latest.slug }}">View letter in browser</a>
+                        </p>
+                        <div class="presentational-container">
+                          <table role="presentation">
+                            <tbody>
+                              <tr class="outer-row">
+                                <td class="headshot-cell">
+                                  <a href="http://www.robertcooper.me">
+                                    <img src="https://shefgamedevsoc.github.io/assets/icons/Logo.png" name="preview-image-url" alt="Logo"/>
+                                  </a>
+                                </td>
+                                <td class="description-cell">
+                                  <table role="presentation">
+                                    <tbody>
+                                      <tr>
+                                        <td colspan="2" class="full-name">Sheffield Game Devlelopment Society</td>
+                                      </tr>
+                                      <tr>
+                                        <td colspan="2" class="title">Student Society</td>
+                                      </tr>
+                                      <tr>
+                                        <td valign="top" class="website">
+                                          <a href="http://bit.ly/shefdev">bit.ly/shefdev</a>
+                                        </td>
+                                      </tr>
+                                      <tr>
+                                        <td colspan="2" class="social-icons">
+                                          <ul>
+                                            <li>
+                                              <a href="https://www.facebook.com/Robert.Cooper.Qu">
+                                                <img src="https://drive.google.com/uc?id=0BxERWEfxe_eUaWFKTlAxdkwyMXc" alt="Let's be friends on Facebook."/>
+                                              </a>
+                                            </li>
+                                            <li>
+                                              <a href="https://twitter.com/RobertCooper_RC">
+                                                <img src="https://drive.google.com/uc?id=0BxERWEfxe_eUY2RBc3dBSW92NVE" alt="Follow me on Twitter!"/>
+                                              </a>
+                                            </li>
+                                            <li>
+                                              <a href="https://www.instagram.com/robert.cooper.qu/">
+                                                <img src="https://drive.google.com/uc?id=0BxERWEfxe_eUY3RIOU5MMnA3TFk" alt="Follow me on Instagram!"/>
+                                              </a>
+                                            </li>
+                                            <li>
+                                              <a href="https://www.linkedin.com/in/robert-cooper">
+                                                <img src="https://drive.google.com/uc?id=0BxERWEfxe_eUSTM0UWdKWUdNbHM" alt="Connected with me on LinkedIn!"/>
+                                              </a>
+                                            </li>
+                                          </ul>
+                                        </td>
+                                      </tr>
+                                    </tbody>
+                                  </table>
+                                </td>
+                              </td>
+                            </tbody>
+                          </table>
+
+                      </td>
+                    </tr>
+                  </table>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </center>
+</body>
+</html>
